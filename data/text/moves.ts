@@ -7527,6 +7527,11 @@ export const MovesText: {[id: IDEntry]: MoveText} = {
 		desc: "Has a 100% chance to paralyze the target.",
 		shortDesc: "100% chance to paralyze the target.",
 	},
+	zekromkick: {
+		name: "Zekrom Kick",
+		desc: "Deals Dragon- or Electric-type damage, whichever is greater.",
+		shortDesc: "Deals Dragon- or Electric-type damage, whichever is greater.",
+	},
 	zenheadbutt: {
 		name: "Zen Headbutt",
 		desc: "Has a 20% chance to make the target flinch.",

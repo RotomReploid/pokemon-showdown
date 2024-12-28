@@ -2125,7 +2125,9 @@ export const AbilitiesText: {[id: IDEntry]: AbilityText} = {
 	},
 	unseenfist: {
 		name: "Unseen Fist",
-		shortDesc: "This Pokemon's contact moves ignore the target's protection, except Max Guard.",
+		shortDesc: "what the fuck",
+
+		start: "  jesus christ",
 	},
 	vesselofruin: {
 		name: "Vessel of Ruin",

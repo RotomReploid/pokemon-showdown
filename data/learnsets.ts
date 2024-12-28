@@ -66750,6 +66750,7 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			voltswitch: ["9M", "8M", "7M", "6M", "5M"],
 			weatherball: ["9M", "8M"],
 			wildcharge: ["9M", "8M", "7M", "6M", "5M"],
+			zekromkick: ["9L50"],
 			zenheadbutt: ["9M", "9L24", "8M", "8L24", "7T", "7L43", "7S4", "7S5", "6T", "6L43", "6S3", "5T", "5L43", "5S0", "5S1"],
 		},
 		eventData: [

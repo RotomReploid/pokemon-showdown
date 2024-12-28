@@ -1113,6 +1113,12 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		// Implemented in statuses.js
 		rating: 1.5,
 		num: 48,
+		onStart(pokemon) {
+			this.field.addPseudoWeather('trickroom');
+		},
+		onModifyPriority(priority, source, target, move) {
+			return priority + 6;
+		},
 	},
 	eartheater: {
 		onTryHit(target, source, move) {
@@ -2397,7 +2403,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	magicbounce: {
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
-			if (target === source || move.hasBounced || !move.flags['reflectable']) {
+			if (target === source || !move.flags['reflectable']) {
 				return;
 			}
 			const newMove = this.dex.getActiveMove(move.id);
@@ -2407,7 +2413,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			return null;
 		},
 		onAllyTryHitSide(target, source, move) {
-			if (target.isAlly(source) || move.hasBounced || !move.flags['reflectable']) {
+			if (target.isAlly(source) || !move.flags['reflectable']) {
 				return;
 			}
 			const newMove = this.dex.getActiveMove(move.id);
@@ -5205,8 +5211,46 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 127,
 	},
 	unseenfist: {
-		onModifyMove(move) {
+		onModifyAtkPriority: 5,
+		onAfterMove(pokemon, target, move) {
+			while (true) {
+				const type = this.sample(this.dex.types.names());
+				if (type && type !== '???' && pokemon.getTypes().join() !== type) {
+					if (!pokemon.setType(type)) return;
+					this.add('-start', pokemon, 'typechange', type, '[from] ability: Unseen Fist');
+					break;
+				}
+			}
+		},
+		onModifyAtk(atk, pokemon, target, move) {
+			if (pokemon.status) {
+				this.debug("Guts Boost");
+				this.chainModify(1.5);
+			}
+			this.debug("HP Boost")
+			return this.chainModify(2);
+		},
+		onModifyMove(move, pokemon, target) {
 			if (move.flags['contact']) delete move.flags['protect'];
+		},
+		onSourceDamagingHit(damage, target, user, move) {
+			if (this.randomChance(1, 100) && this.checkMoveMakesContact(move, user, target)) {
+				if (this.randomChance(1, 100)) {
+					this.actions.useMove('explosion', user);
+				} else {
+					this.actions.useMove('explosion', target);
+				}
+			}
+		},
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Unseen Fist');
+			this.boost({ atk: 2, def: 2, spa: 2, spd: 2, spe: 2, accuracy: 2, evasion: -6 }, pokemon);
+			this.field.addPseudoWeather('magicroom', pokemon);
+		},
+		onTryHit(source, target, move) {
+			if (move.id === 'explosion') {
+				return null;
+			}
 		},
 		flags: {},
 		name: "Unseen Fist",
