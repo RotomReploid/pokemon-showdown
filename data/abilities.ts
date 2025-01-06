@@ -5225,10 +5225,8 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		},
 		onModifyAtk(atk, pokemon, target, move) {
 			if (pokemon.status) {
-				this.debug("Guts Boost");
 				this.chainModify(1.5);
 			}
-			this.debug("HP Boost")
 			return this.chainModify(2);
 		},
 		onModifyMove(move, pokemon, target) {
