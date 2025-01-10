@@ -3524,7 +3524,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			}
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.flags['sound'] && move.type !== 'Sound') {
+			if (move.type === 'Sound' || move.flags['sound']) {
 				this.debug('Punk Rock weaken');
 				return this.chainModify(0.5);
 			}

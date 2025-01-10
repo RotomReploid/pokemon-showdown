@@ -3825,7 +3825,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	politoed: {
 		num: 186,
 		name: "Politoed",
-		types: ["Water"],
+		types: ["Water", "Sound"],
 		baseStats: {hp: 90, atk: 75, def: 75, spa: 90, spd: 100, spe: 70},
 		abilities: {0: "Water Absorb", 1: "Damp", H: "Drizzle"},
 		heightm: 1.1,
@@ -4043,7 +4043,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	misdreavus: {
 		num: 200,
 		name: "Misdreavus",
-		types: ["Ghost"],
+		types: ["Ghost", "Sound"],
 		baseStats: {hp: 60, atk: 60, def: 60, spa: 85, spd: 85, spe: 85},
 		abilities: {0: "Levitate"},
 		heightm: 0.7,
@@ -5483,7 +5483,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	whismur: {
 		num: 293,
 		name: "Whismur",
-		types: ["Normal"],
+		types: ["Sound"],
 		baseStats: {hp: 64, atk: 51, def: 23, spa: 51, spd: 23, spe: 28},
 		abilities: {0: "Soundproof", H: "Rattled"},
 		heightm: 0.6,
@@ -5495,7 +5495,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	loudred: {
 		num: 294,
 		name: "Loudred",
-		types: ["Normal"],
+		types: ["Sound"],
 		baseStats: {hp: 84, atk: 71, def: 43, spa: 71, spd: 43, spe: 48},
 		abilities: {0: "Soundproof", H: "Scrappy"},
 		heightm: 1,
@@ -5509,7 +5509,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	exploud: {
 		num: 295,
 		name: "Exploud",
-		types: ["Normal"],
+		types: ["Sound"],
 		baseStats: {hp: 104, atk: 91, def: 63, spa: 91, spd: 73, spe: 68},
 		abilities: {0: "Soundproof", H: "Scrappy"},
 		heightm: 1.5,
@@ -6491,7 +6491,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	chimecho: {
 		num: 358,
 		name: "Chimecho",
-		types: ["Psychic"],
+		types: ["Psychic", "Sound"],
 		baseStats: {hp: 75, atk: 50, def: 80, spa: 95, spd: 90, spe: 65},
 		abilities: {0: "Levitate"},
 		heightm: 0.6,
@@ -7269,7 +7269,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	kricketune: {
 		num: 402,
 		name: "Kricketune",
-		types: ["Bug"],
+		types: ["Bug", "Sound"],
 		baseStats: {hp: 77, atk: 85, def: 51, spa: 55, spd: 51, spe: 65},
 		abilities: {0: "Swarm", H: "Technician"},
 		heightm: 1,
@@ -7697,7 +7697,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	mismagius: {
 		num: 429,
 		name: "Mismagius",
-		types: ["Ghost"],
+		types: ["Ghost", "Sound"],
 		baseStats: {hp: 60, atk: 60, def: 60, spa: 105, spd: 105, spe: 105},
 		abilities: {0: "Levitate"},
 		heightm: 0.9,
@@ -7857,7 +7857,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	chatot: {
 		num: 441,
 		name: "Chatot",
-		types: ["Normal", "Flying"],
+		types: ["Sound", "Flying"],
 		baseStats: {hp: 76, atk: 65, def: 45, spa: 92, spd: 42, spe: 91},
 		abilities: {0: "Keen Eye", 1: "Tangled Feet", H: "Big Pecks"},
 		heightm: 0.5,
@@ -9572,7 +9572,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	audino: {
 		num: 531,
 		name: "Audino",
-		types: ["Normal"],
+		types: ["Normal", "Sound"],
 		baseStats: {hp: 103, atk: 60, def: 86, spa: 60, spd: 86, spe: 50},
 		abilities: {0: "Healer", 1: "Regenerator", H: "Klutz"},
 		heightm: 1.1,
@@ -9653,7 +9653,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	palpitoad: {
 		num: 536,
 		name: "Palpitoad",
-		types: ["Water", "Ground"],
+		types: ["Water", "Sound"],
 		baseStats: {hp: 75, atk: 65, def: 55, spa: 65, spd: 55, spe: 69},
 		abilities: {0: "Swift Swim", 1: "Hydration", H: "Water Absorb"},
 		heightm: 0.8,
@@ -9667,7 +9667,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	seismitoad: {
 		num: 537,
 		name: "Seismitoad",
-		types: ["Water", "Ground"],
+		types: ["Water", "Sound"],
 		baseStats: {hp: 105, atk: 95, def: 75, spa: 85, spd: 75, spe: 74},
 		abilities: {0: "Swift Swim", 1: "Poison Touch", H: "Water Absorb"},
 		heightm: 1.5,
@@ -11416,7 +11416,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		num: 648,
 		name: "Meloetta",
 		baseForme: "Aria",
-		types: ["Normal", "Psychic"],
+		types: ["Sound", "Psychic"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 77, def: 77, spa: 128, spd: 128, spe: 90},
 		abilities: {0: "Serene Grace"},
@@ -11433,7 +11433,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		name: "Meloetta-Pirouette",
 		baseSpecies: "Meloetta",
 		forme: "Pirouette",
-		types: ["Normal", "Fighting"],
+		types: ["Sound", "Fighting"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 128, def: 90, spa: 77, spd: 77, spe: 128},
 		abilities: {0: "Serene Grace"},
@@ -12673,7 +12673,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	noibat: {
 		num: 714,
 		name: "Noibat",
-		types: ["Flying", "Dragon"],
+		types: ["Sound", "Flying"],
 		baseStats: {hp: 40, atk: 30, def: 35, spa: 45, spd: 40, spe: 55},
 		abilities: {0: "Frisk", 1: "Infiltrator", H: "Telepathy"},
 		heightm: 0.5,
@@ -12685,7 +12685,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	noivern: {
 		num: 715,
 		name: "Noivern",
-		types: ["Flying", "Dragon"],
+		types: ["Sound", "Dragon"],
 		baseStats: {hp: 85, atk: 70, def: 80, spa: 97, spd: 80, spe: 123},
 		abilities: {0: "Frisk", 1: "Infiltrator", H: "Telepathy"},
 		heightm: 1.5,
