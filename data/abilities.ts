@@ -2383,7 +2383,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	liquidvoice: {
 		onModifyTypePriority: -1,
 		onModifyType(move, pokemon) {
-			if (move.flags['sound'] && !pokemon.volatiles['dynamax']) { // hardcode
+			if ((move.type === 'Sound' || move.flags['sound']) && !pokemon.volatiles['dynamax']) { // hardcode
 				move.type = 'Water';
 			}
 		},
@@ -3518,13 +3518,13 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	punkrock: {
 		onBasePowerPriority: 7,
 		onBasePower(basePower, attacker, defender, move) {
-			if (move.flags['sound']) {
+			if (move.type === 'Sound' || move.flags['sound']) {
 				this.debug('Punk Rock boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			}
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.flags['sound']) {
+			if (move.flags['sound'] && move.type !== 'Sound') {
 				this.debug('Punk Rock weaken');
 				return this.chainModify(0.5);
 			}
@@ -4363,13 +4363,13 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	soundproof: {
 		onTryHit(target, source, move) {
-			if (target !== source && move.flags['sound']) {
+			if (target !== source && (move.type === 'Sound' || move.flags['sound'])) {
 				this.add('-immune', target, '[from] ability: Soundproof');
 				return null;
 			}
 		},
 		onAllyTryHitSide(target, source, move) {
-			if (move.flags['sound']) {
+			if ((move.type === 'Sound' || move.flags['sound'])) {
 				this.add('-immune', this.effectState.target, '[from] ability: Soundproof');
 			}
 		},

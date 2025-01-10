@@ -5815,7 +5815,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			basePower: 30,
 		},
 		onAfterMoveSecondarySelf(target, source, move) {
-			if (move.flags['sound']) {
+			if (move.type === 'Sound' || move.flags['sound']) {
 				target.useItem();
 			}
 		},
