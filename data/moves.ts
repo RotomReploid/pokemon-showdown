@@ -1748,7 +1748,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: {protect: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
 		secondary: null,
 		target: "allAdjacent",
-		type: "Sound",
+		type: "Normal",
 		contestType: "Tough",
 	},
 	bounce: {
@@ -2446,7 +2446,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			volatileStatus: 'confusion',
 		},
 		target: "any",
-		type: "Sound",
+		type: "Flying",
 		contestType: "Cute",
 	},
 	chillingwater: {
@@ -4590,7 +4590,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		secondary: null,
 		target: "normal",
-		type: "Sound",
+		type: "Normal",
 		contestType: "Beautiful",
 	},
 	eerieimpulse: {
@@ -9527,7 +9527,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: {protect: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
 		secondary: null,
 		target: "allAdjacentFoes",
-		type: "Sound",
+		type: "Normal",
 		contestType: "Cool",
 	},
 	hypnosis: {
@@ -15484,7 +15484,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			}
 		},
 		target: "allAdjacentFoes",
-		type: "Sound",
+		type: "Normal",
 		contestType: "Beautiful",
 	},
 	rest: {
@@ -16077,7 +16077,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		secondary: null,
 		target: "normal",
-		type: "Round",
+		type: "Normal",
 		contestType: "Beautiful",
 	},
 	ruination: {
@@ -16425,7 +16425,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		secondary: null,
 		target: "normal",
-		type: "Screech",
+		type: "Normal",
 		zMove: {boost: {atk: 1}},
 		contestType: "Clever",
 	},
@@ -17109,7 +17109,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		status: 'slp',
 		secondary: null,
 		target: "normal",
-		type: "Sound",
+		type: "Normal",
 		zMove: {boost: {spe: 1}},
 		contestType: "Cute",
 	},
@@ -19198,7 +19198,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		volatileStatus: 'confusion',
 		secondary: null,
 		target: "normal",
-		type: "Sound",
+		type: "Normal",
 		zMove: {boost: {spe: 1}},
 		contestType: "Clever",
 	},
@@ -21043,7 +21043,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		secondary: null,
 		target: "randomNormal",
-		type: "Sound",
+		type: "Normal",
 		contestType: "Cute",
 	},
 	vacuumwave: {
@@ -22043,47 +22043,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		target: "normal",
 		type: "Electric",
-		contestType: "Cool",
-	},
-
-	// stupid
-
-	soundpunch: {
-		num: 0,
-		accuracy: 100,
-		basePower: 80,
-		category: "Physical",
-		name: "Sound Punch",
-		pp: 20,
-		priority: 0,
-		flags: {protect: 1, mirror: 1, metronome: 1, contact: 1, sound: 1, punch: 1},
-		secondary: null,
-		target: "normal",
-		type: "Sound",
-		contestType: "Tough",
-	},
-	zekromkick: {
-		num: 0,
-		accuracy: 100,
-		basePower: 120,
-		category: "Physical",
-		name: "Zekrom Kick",
-		pp: 10,
-		priority: 0,
-		flags: {protect: 1, mirror: 1, metronome: 1, contact: 1},
-		onModifyType(move, pokemon, target) {
-			if (!target) return;
-			const dragon = target.runImmunity("Dragon") ? target.runEffectiveness(move) : Number.MIN_SAFE_INTEGER;
-			move.type = "Electric";
-			const electric = target.runImmunity("Electric") ? target.runEffectiveness(move) : Number.MIN_SAFE_INTEGER;
-			this.debug(`Dragon-type Effectiveness: ${dragon}\n` +
-					   `       Electric-type  Effectiveness: ${electric}\n` +
-					   `       Dragon-type? ${dragon >= electric}`);
-			if (dragon >= electric) move.type = "Dragon";
-		},
-		secondary: null,
-		target: "normal",
-		type: "Dragon",
 		contestType: "Cool",
 	},
 
