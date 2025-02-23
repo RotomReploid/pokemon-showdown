@@ -5206,7 +5206,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 127,
 	},
 	unseenfist: {
-		onModifyMove(move, pokemon, target) {
+		onModifyMove(move) {
 			if (move.flags['contact']) delete move.flags['protect'];
 		},
 		flags: {},

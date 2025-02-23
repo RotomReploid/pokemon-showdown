@@ -12685,7 +12685,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	noivern: {
 		num: 715,
 		name: "Noivern",
-		types: ["Sound", "Dragon"],
+		types: ["Flying", "Dragon"],
 		baseStats: {hp: 85, atk: 70, def: 80, spa: 97, spd: 80, spe: 123},
 		abilities: {0: "Frisk", 1: "Infiltrator", H: "Telepathy"},
 		heightm: 1.5,
