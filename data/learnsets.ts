@@ -66750,7 +66750,6 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			voltswitch: ["9M", "8M", "7M", "6M", "5M"],
 			weatherball: ["9M", "8M"],
 			wildcharge: ["9M", "8M", "7M", "6M", "5M"],
-			zekromkick: ["9L50"],
 			zenheadbutt: ["9M", "9L24", "8M", "8L24", "7T", "7L43", "7S4", "7S5", "6T", "6L43", "6S3", "5T", "5L43", "5S0", "5S1"],
 		},
 		eventData: [
@@ -85980,7 +85979,6 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			facade: ["9M", "8M"],
 			falseswipe: ["9M", "8M"],
 			firepunch: ["9M", "8M"],
-			fishiousrend: ["9M", "8M"],
 			fling: ["9M", "8M"],
 			focusblast: ["9M", "8M"],
 			focusenergy: ["9L1", "8M", "8L1"],
