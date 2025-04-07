@@ -41,6 +41,28 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		rating: 4,
 		num: 156,
 	},
+	partingshotimidator: {
+		name: "Partingshotimidator",
+		onStart(pokemon) {
+			let activated = false;
+			for (const target of pokemon.adjacentFoes()) {
+				if (!activated) {
+					this.add('-ability', pokemon, 'Intimidate', 'boost');
+					activated = true;
+				}
+				if (target.volatiles['substitute']) {
+					this.add('-immune', target);
+				} else {
+					this.boost({atk: -1}, target, pokemon, null, true);
+				}
+			}
+		},
+		onSwitchOut(pokemon) {
+			this.actions.useMove('partingshot', pokemon);
+			pokemon.heal(pokemon.baseMaxhp / 3);
+		},
+		flags: {},
+	},
 	unseenfist: {
 		onModifyAtkPriority: 5,
 		onAfterMove(pokemon, target, move) {
