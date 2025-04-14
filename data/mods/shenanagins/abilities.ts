@@ -61,7 +61,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			this.actions.useMove('partingshot', pokemon);
 			pokemon.heal(pokemon.baseMaxhp / 3);
 		},
-		flags: {},
+		flags: {cantsuppress: 1},
 	},
 	unseenfist: {
 		onModifyAtkPriority: 5,

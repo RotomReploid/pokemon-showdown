@@ -110,12 +110,12 @@ export const Conditions: import('../../../sim/dex-conditions').ModdedConditionDa
 	},
 	mudkiproom: {
 		onFieldStart(field, source) {
-			this.add('-fieldstart', 'move: Locked Room', '[of] ' + source);
+			this.add('-fieldstart', 'move: Mudkip Room', '[of] ' + source);
 			this.effectState.mudkip = 1;
 		},
 		onFieldRestart(field, source) {
 			if (this.effectState.mudkip >= 6) return false;
-			this.add('-fieldstart', 'move: Locked Room', '[of] ' + source);
+			this.add('-fieldstart', 'move: Mudkip Room', '[of] ' + source);
 			this.effectState.mudkip++;
 		},
 		onSwitchIn(pokemon) {
@@ -128,6 +128,85 @@ export const Conditions: import('../../../sim/dex-conditions').ModdedConditionDa
 					spe: this.effectState.mudkip
 				}, pokemon)
 			}
+		},
+	},
+	smogroom: {
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasAbility('persistent')) {
+				this.add('-activate', source, 'ability: Persistent', '[move] Smog Room');
+				return 7;
+			}
+			return 5;
+		},
+		onResidual(target) {
+			target.trySetStatus('psn');
+		},
+		onAfterMove(source, target, move) {
+			if (move.flags['wind']) {
+				// TODO: Have non-status moves decrease time based on power
+				this.effectState.duration -= 2;
+			}
+		},
+		onFieldStart(field, source) {
+			if (source?.hasAbility('persistent')) {
+				this.add('-fieldstart', 'move: Smog Room', '[of] ' + source, '[persistent]');
+			} else {
+				this.add('-fieldstart', 'move: Smog Room', '[of] ' + source);
+			}
+		},
+		onFieldRestart(target, source, sourceEffect) {
+			if (source?.hasAbility('persistent')) {
+				this.add('-activate', source, 'ability: Persistent', '[move] Smog Room');
+				this.effectState.duration = 7;
+				return;
+			}
+			this.effectState.duration = 5;
+		},
+		onFieldResidualOrder: 27,
+		onFieldResidualSubOrder: 5,
+		onFieldEnd() {
+			this.add('-fieldend', 'move: Smog Room');
+		},
+	},
+	smokeroom: {
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasAbility('persistent')) {
+				this.add('-activate', source, 'ability: Persistent', '[move] Smoke Room');
+				return 7;
+			}
+			return 5;
+		},
+		onModifyAccuracy(accuracy) {
+			if (typeof accuracy !== 'number') return;
+			return this.chainModify(0.5);
+		},
+		onAfterMove(source, target, move) {
+			if (move.flags['wind']) {
+				// TODO: Have non-status moves decrease time based on power
+				this.effectState.duration -= 2;
+			}
+		},
+		onFieldStart(field, source) {
+			if (source?.hasAbility('persistent')) {
+				this.add('-fieldstart', 'move: Smoke Room', '[of] ' + source, '[persistent]');
+			} else {
+				this.add('-fieldstart', 'move: Smoke Room', '[of] ' + source);
+			}
+		},
+		onFieldRestart(target, source, sourceEffect) {
+			if (source?.hasAbility('persistent')) {
+				this.add('-activate', source, 'ability: Persistent', '[move] Smoke Room');
+				this.effectState.duration = 7;
+				return;
+			}
+			this.effectState.duration = 5;
+		},
+		onFieldResidualOrder: 27,
+		onFieldResidualSubOrder: 5,
+		onFieldEnd() {
+			this.add('-fieldend', 'move: Smoke Room');
 		},
 	},
 }
