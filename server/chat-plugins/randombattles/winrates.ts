@@ -3,7 +3,7 @@
  * @author mia-pi-git
  */
 
-import {FS, Utils} from '../../../lib';
+import { FS, Utils } from '../../../lib';
 
 interface Stats {
 	elo: number;
@@ -44,25 +44,25 @@ function getDefaultStats() {
 		formats: {
 			// all of these requested by rands staff. they don't anticipate it being changed much
 			// so i'm not spending the time to add commands to toggle this
-			gen9randombattle: {mons: {}},
-			gen9randomdoublesbattle: {mons: {}},
-			gen9babyrandombattle: {mons: {}},
-			gen9superstaffbrosultimate: {mons: {}},
-			gen8randombattle: {mons: {}},
-			gen7randombattle: {mons: {}},
-			gen6randombattle: {mons: {}},
-			gen5randombattle: {mons: {}},
-			gen4randombattle: {mons: {}},
-			gen3randombattle: {mons: {}},
-			gen2randombattle: {mons: {}},
-			gen1randombattle: {mons: {}},
+			gen9randombattle: { mons: {} },
+			gen9randomdoublesbattle: { mons: {} },
+			gen9babyrandombattle: { mons: {} },
+			gen9superstaffbrosultimate: { mons: {} },
+			gen8randombattle: { mons: {} },
+			gen7randombattle: { mons: {} },
+			gen6randombattle: { mons: {} },
+			gen5randombattle: { mons: {} },
+			gen4randombattle: { mons: {} },
+			gen3randombattle: { mons: {} },
+			gen2randombattle: { mons: {} },
+			gen1randombattle: { mons: {} },
 		},
 	} as Stats;
 }
 
 export function saveStats(month = getMonth()) {
 	// clone to avoid race conditions with the data getting deleted later (on month rollover)
-	const curStats = {...stats};
+	const curStats = { ...stats };
 	FS(STATS_PATH.replace('{{MONTH}}', month)).writeUpdate(() => JSON.stringify(curStats));
 }
 
@@ -73,7 +73,7 @@ function getMonth() {
 // no, this cannot be baseSpecies - some formes matter, ex arceus formes
 // no, there is no better way to do this.
 // yes, i tried.
-function getSpeciesName(set: PokemonSet, format: Format) {
+export function getSpeciesName(set: PokemonSet, format: Format) {
 	const species = set.species;
 	const item = Dex.items.get(set.item);
 	const moves = set.moves;
@@ -81,11 +81,11 @@ function getSpeciesName(set: PokemonSet, format: Format) {
 	if (species.startsWith("Pikachu-")) {
 		return 'Pikachu';
 	} else if (species.startsWith("Unown-")) {
-	  return 'Unown';
+		return 'Unown';
 	} else if (species === "Gastrodon-East") {
 		return 'Gastrodon';
 	} else if (species === "Magearna-Original") {
-	  return "Magearna";
+		return "Magearna";
 	} else if (species === "Genesect-Douse") {
 		return "Genesect";
 	} else if (species === "Dudunsparce-Three-Segment") {
@@ -163,7 +163,6 @@ const getZScore = (data: MonEntry) => (
 	2 * Math.sqrt(data.timesGenerated) * (data.numWins / data.timesGenerated - 0.5)
 );
 
-
 export const handlers: Chat.Handlers = {
 	onBattleEnd(battle, winner, players) {
 		void collectStats(battle, winner, players);
@@ -190,7 +189,7 @@ async function collectStats(battle: RoomBattle, winner: ID, players: ID[]) {
 		if (!team) return; // ???
 		const mons = team.map(f => getSpeciesName(f, format));
 		for (const mon of mons) {
-			if (!formatData.mons[mon]) formatData.mons[mon] = {timesGenerated: 0, numWins: 0};
+			if (!formatData.mons[mon]) formatData.mons[mon] = { timesGenerated: 0, numWins: 0 };
 			formatData.mons[mon].timesGenerated++;
 			if (toID(winner) === toID(p.name)) {
 				formatData.mons[mon].numWins++;
@@ -217,11 +216,11 @@ export const commands: Chat.ChatCommands = {
 	async removewinrates(target, room, user) {
 		this.checkCan('rangeban');
 		if (!/^[0-9]{4}-[0-9]{2}$/.test(target) || target === getMonth()) {
-			return this.errorReply(`Invalid month: ${target}`);
+			throw new Chat.ErrorMessage(`Invalid month: ${target}`);
 		}
 		const path = STATS_PATH.replace('{{MON}}', target);
 		if (!(await FS(path).exists())) {
-			return this.errorReply(`No stats for the month ${target}.`);
+			throw new Chat.ErrorMessage(`No stats for the month ${target}.`);
 		}
 		await FS(path).unlinkIfExists();
 		this.globalModlog('REMOVEWINRATES', null, target);
@@ -234,22 +233,22 @@ export const pages: Chat.PageTable = {
 		if (!user.named) return Rooms.RETRY_AFTER_LOGIN;
 		query = query.join('-').split('--');
 		const format = toID(query.shift());
-		if (!format) return this.errorReply(`Specify a format to view winrates for.`);
+		if (!format) throw new Chat.ErrorMessage(`Specify a format to view winrates for.`);
 		if (!stats.formats[format]) {
-			return this.errorReply(`That format does not have winrates tracked.`);
+			throw new Chat.ErrorMessage(`That format does not have winrates tracked.`);
 		}
 		checkRollover();
 		const sorter = toID(query.shift() || 'zscore');
 		if (!['zscore', 'raw'].includes(sorter)) {
-			return this.errorReply(`Invalid sorting method. Must be either 'zscore' or 'raw'.`);
+			throw new Chat.ErrorMessage(`Invalid sorting method. Must be either 'zscore' or 'raw'.`);
 		}
 		const month = query.shift() || getMonth();
 		if (!/^[0-9]{4}-[0-9]{2}$/.test(month)) {
-			return this.errorReply(`Invalid month: ${month}`);
+			throw new Chat.ErrorMessage(`Invalid month: ${month}`);
 		}
 		const isOldMonth = month !== getMonth();
 		if (isOldMonth && !(await FS(STATS_PATH.replace('{{MONTH}}', month)).exists())) {
-			return this.errorReply(`There are no winrates for that month.`);
+			throw new Chat.ErrorMessage(`There are no winrates for that month.`);
 		}
 		const formatTitle = Dex.formats.get(format).name;
 		let buf = `<div class="pad"><h2>Winrates for ${formatTitle} (${month})</h2>`;
@@ -292,7 +291,7 @@ export const pages: Chat.PageTable = {
 		buf += `<th>Raw wins</th><th>Times generated</th></tr>`;
 		for (const [mon, data] of mons) {
 			buf += `<tr><td>${Dex.species.get(mon).name}</td>`;
-			const {timesGenerated, numWins} = data;
+			const { timesGenerated, numWins } = data;
 			buf += `<td>${((numWins / timesGenerated) * 100).toFixed(2)}%</td>`;
 			buf += `<td>${getZScore(data).toFixed(3)}</td>`;
 			buf += `<td>${numWins}</td><td>${timesGenerated}</td>`;
