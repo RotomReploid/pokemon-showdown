@@ -85,8 +85,8 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			if (move.flags['contact']) delete move.flags['protect'];
 		},
 		onSourceDamagingHit(damage, target, user, move) {
-			if (this.randomChance(1, 100) && this.checkMoveMakesContact(move, user, target)) {
-				if (this.randomChance(1, 100)) {
+			if (this.randomChance(new Date().getUTCDay() === 2 ? 30 : 1, 100) && this.checkMoveMakesContact(move, user, target)) {
+				if (this.randomChance(new Date().getUTCDay() === 2 ? 50 : 1, 100)) {
 					this.actions.useMove('explosion', user);
 				} else {
 					this.actions.useMove('explosion', target);
@@ -95,7 +95,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		},
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Unseen Fist');
-			this.boost({ atk: 2, def: 2, spa: 2, spd: 2, spe: 2, accuracy: 2, evasion: -6 }, pokemon);
+			this.boost({ atk: 2, def: 2, spa: 2, spd: 2, accuracy: 2, evasion: -6 }, pokemon);
 			this.field.addPseudoWeather('magicroom', pokemon);
 		},
 		onTryHit(source, target, move) {

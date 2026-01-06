@@ -145,7 +145,7 @@ export const Conditions: import('../../../sim/dex-conditions').ModdedConditionDa
 		onAfterMove(source, target, move) {
 			if (move.flags['wind']) {
 				// TODO: Have non-status moves decrease time based on power
-				this.effectState.duration -= 2;
+				if (this.effectState.duration) this.effectState.duration -= 2;
 			}
 		},
 		onFieldStart(field, source) {
@@ -185,7 +185,7 @@ export const Conditions: import('../../../sim/dex-conditions').ModdedConditionDa
 		onAfterMove(source, target, move) {
 			if (move.flags['wind']) {
 				// TODO: Have non-status moves decrease time based on power
-				this.effectState.duration -= 2;
+				if (this.effectState.duration) this.effectState.duration -= 2;
 			}
 		},
 		onFieldStart(field, source) {
